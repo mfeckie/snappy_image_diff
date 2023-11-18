@@ -1,18 +1,5 @@
 defmodule SnappyImageDiff do
-  @moduledoc """
-  Documentation for `SnappyImageDiff`.
-  """
+  use Rustler, otp_app: :snappy_image_diff, crate: :diff
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> SnappyImageDiff.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  def diff(_arg1, _arg2), do: :erlang.nif_error(:nif_not_loaded)
 end
