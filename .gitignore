@@ -24,3 +24,4 @@ snappy_image_diff-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+*.so
