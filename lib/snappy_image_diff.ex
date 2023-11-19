@@ -23,8 +23,15 @@ defmodule SnappyImageDiff do
   @doc """
   Compare two images and return a tuple with the result.
 
-  And differences will be written to a file in the same directory as the
+  Any differences will be written to a PNG file in the same directory as the
   `before` image with the suffix `-diff`.
+
+  Returns `{:ok, :images_match}` if the images are identical.
+
+  Returns `{:error, :dimension_mismatch}` if the images are different sizes.
+
+  Returns `{:error, :different, score, diff_location}` if the images are different.
+
   """
   def diff(before_path, after_path) do
     expanded = Path.expand(before_path)
@@ -39,10 +46,12 @@ defmodule SnappyImageDiff do
   @doc """
   Compare two images and return a tuple with the result.
 
-  And differences will be written to the path specified by `output_path`.
+  Any differences will be written to a PNG file the path specified by `output_path`.
 
   Returns `{:ok, :images_match}` if the images are identical.
+
   Returns `{:error, :dimension_mismatch}` if the images are different sizes.
+
   Returns `{:error, :different, score, diff_location}` if the images are different.
 
   ## Examples
