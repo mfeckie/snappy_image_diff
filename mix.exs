@@ -7,6 +7,7 @@ defmodule SnappyImageDiff.MixProject do
       app: :snappy_image_diff,
       version: @version,
       elixir: "~> 1.15",
+      description: "Elixir wrapper for Rust based image diffing",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: [
