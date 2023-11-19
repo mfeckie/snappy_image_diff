@@ -27,3 +27,4 @@ snappy_image_diff-*.tar
 *.so
 /test/fixtures/*-diff.png
 .DS_Store
+checksum-Elixir.SnappyImageDiff.exs
