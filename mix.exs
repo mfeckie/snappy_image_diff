@@ -22,7 +22,7 @@ defmodule SnappyImageDiff.MixProject do
   defp deps do
     [
       {:ex_doc, "~> 0.30", only: :dev, runtime: false},
-      {:rustler, "~> 0.30.0", runtime: false},
+      {:rustler, ">= 0.0.0", optional: true},
       {:rustler_precompiled, "~> 0.7"}
     ]
   end
