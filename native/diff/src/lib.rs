@@ -1,11 +1,8 @@
-use anyhow::Error;
 use image::io::Reader as ImageReader;
 use image::{DynamicImage, GenericImage, GenericImageView, Rgba};
 use rustler::types::atom;
 use rustler::{Encoder, Env, NifResult, Term};
 use std::io::Cursor;
-
-pub type Result<T> = std::result::Result<T, Error>;
 
 rustler::atoms! {
     different,
