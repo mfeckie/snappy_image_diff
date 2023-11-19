@@ -1,10 +1,11 @@
 defmodule SnappyImageDiff.MixProject do
   use Mix.Project
+  @version "0.3.1"
 
   def project do
     [
       app: :snappy_image_diff,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
