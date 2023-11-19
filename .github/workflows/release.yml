@@ -51,7 +51,7 @@ jobs:
         target: ${{ matrix.job.target }}
         nif-version: ${{ matrix.nif }}
         use-cross: ${{ matrix.job.use-cross }}
-        project-dir: "native/diff"
+        project-dir: "native/snappy_image_diff"
 
     - name: Artifact upload
       uses: actions/upload-artifact@v3
