@@ -7,7 +7,12 @@ defmodule SnappyImageDiff.MixProject do
       version: "0.1.0",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      docs: [
+        extras: "README.md",
+        main: "readme"
+      ],
+      package: package()
     ]
   end
 
@@ -15,6 +20,20 @@ defmodule SnappyImageDiff.MixProject do
   def application do
     [
       extra_applications: [:logger]
+    ]
+  end
+
+  def package do
+    [
+      licenses: ["MIT"],
+      maintainers: ["Martin Feckie"],
+      links: %{
+        "Github" => "https://github.com/mfeckie/snappy_image_diff"
+      },
+      files: ["lib", "native", "README.md", "mix.exs", "checksum-*.exs"],
+      exclude_patterns: [
+        "native/snappy_image_diff/target"
+      ]
     ]
   end
 
