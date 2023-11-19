@@ -25,3 +25,5 @@ snappy_image_diff-*.tar
 # Temporary files, for example, from tests.
 /tmp/
 *.so
+/test/fixtures/*-diff.png
+.DS_Store
