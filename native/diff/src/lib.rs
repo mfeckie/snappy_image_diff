@@ -7,7 +7,8 @@ use std::io::Cursor;
 rustler::atoms! {
     different,
     decode_error,
-    dimension_mismatch
+    dimension_mismatch,
+    not_found
 }
 
 #[rustler::nif]
@@ -17,20 +18,14 @@ pub fn diff_and_save<'a>(
     after_path: &str,
     output_path: &str,
 ) -> NifResult<Term<'a>> {
-    let before = match ImageReader::open(before_path) {
-        Ok(reader) => match reader.decode() {
-            Ok(image) => image,
-            Err(_) => return Ok((decode_error(), before_path).encode(env)),
-        },
-        Err(_) => return Ok((atom::error(), "File not found").encode(env)),
+    let before = match open_image(before_path) {
+        Ok(image) => image,
+        Err((atom, message)) => return Ok((atom, message).encode(env)),
     };
 
-    let after = match ImageReader::open(after_path) {
-        Ok(reader) => match reader.decode() {
-            Ok(image) => image,
-            Err(_) => return Ok((decode_error(), after_path).encode(env)),
-        },
-        Err(_) => return Ok((atom::error(),).encode(env)),
+    let after = match open_image(after_path) {
+        Ok(image) => image,
+        Err((atom, message)) => return Ok((atom, message).encode(env)),
     };
 
     let (after_width, after_height) = after.dimensions();
@@ -85,20 +80,14 @@ pub fn diff_and_save<'a>(
 
 #[rustler::nif]
 pub fn diff<'a>(env: Env<'a>, before_path: &str, after_path: &str) -> NifResult<Term<'a>> {
-    let before = match ImageReader::open(before_path) {
-        Ok(reader) => match reader.decode() {
-            Ok(image) => image,
-            Err(_) => return Ok((decode_error(), before_path).encode(env)),
-        },
-        Err(_) => return Ok((atom::error(), "File not found").encode(env)),
+   let before = match open_image(before_path) {
+        Ok(image) => image,
+        Err((atom, message)) => return Ok((atom, message).encode(env)),
     };
 
-    let after = match ImageReader::open(after_path) {
-        Ok(reader) => match reader.decode() {
-            Ok(image) => image,
-            Err(_) => return Ok((decode_error(), after_path).encode(env)),
-        },
-        Err(_) => return Ok((atom::error(),).encode(env)),
+    let after = match open_image(after_path) {
+        Ok(image) => image,
+        Err((atom, message)) => return Ok((atom, message).encode(env)),
     };
 
     let (after_width, after_height) = after.dimensions();
@@ -149,6 +138,16 @@ pub fn diff<'a>(env: Env<'a>, before_path: &str, after_path: &str) -> NifResult<
         }
     } else {
         return Ok((atom::ok()).encode(env));
+    }
+}
+
+fn open_image(path: &str) -> Result<DynamicImage, (atom::Atom, atom::Atom)> {
+    match ImageReader::open(path) {
+        Ok(reader) => match reader.decode() {
+            Ok(image) => Ok(image),
+            Err(_) => Err((atom::error(), decode_error())),
+        },
+        Err(_) => Err((atom::error(), not_found())),
     }
 }
 
