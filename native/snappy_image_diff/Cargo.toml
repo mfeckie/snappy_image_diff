@@ -5,7 +5,7 @@ authors = []
 edition = "2021"
 
 [lib]
-name = "diff"
+name = "snappy_image_diff"
 path = "src/lib.rs"
 crate-type = ["cdylib"]
 
