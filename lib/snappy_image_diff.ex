@@ -18,7 +18,8 @@ defmodule SnappyImageDiff do
       x86_64-pc-windows-gnu
       x86_64-unknown-linux-gnu
       x86_64-unknown-linux-musl
-    )
+    ),
+    nif_versions: ["2.15", "2.16", "2.17"]
 
   @doc """
   Compare two images and return a tuple with the result.
