@@ -12,10 +12,25 @@ defmodule SnappyImageDiffTest do
     }
   end
 
+  test "Images match" do
+    before_image = "test/fixtures/1a.png"
+    after_image = "test/fixtures/1a.png"
+
+    assert {:ok, :images_match} = SnappyImageDiff.diff(before_image, after_image)
+  end
+
   test "Mismatched sizes" do
     before_image = "test/fixtures/6a.png"
     after_image = "test/fixtures/6a_cropped.png"
 
     assert {:error, :dimension_mismatch} = SnappyImageDiff.diff(before_image, after_image)
+  end
+
+  test "Images do not match" do
+    {before_image, after_image, diff_image} = fixture("2")
+
+    assert {:error, :different, generated_diff} = SnappyImageDiff.diff(before_image, after_image)
+
+    File.write!("test/fixtures/1-generated-diff.png", generated_diff)
   end
 end

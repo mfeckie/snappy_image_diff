@@ -5,9 +5,10 @@ use rustler::{Encoder, Env, NifResult, Term};
 use std::io::Cursor;
 
 rustler::atoms! {
-    different,
     decode_error,
+    different,
     dimension_mismatch,
+    images_match,
     not_found,
     write_failure
 }
@@ -40,11 +41,11 @@ pub fn diff_and_save<'a>(
 
     if result != before {
         match result.save(output_path) {
-            Ok(_) => return Ok((different()).encode(env)),
+            Ok(_) => return Ok((atom::error(), different()).encode(env)),
             Err(_) => return Ok((atom::error(), write_failure()).encode(env)),
         }
     } else {
-        return Ok((atom::ok()).encode(env));
+        return Ok((atom::ok(), images_match()).encode(env));
     }
 }
 
@@ -73,11 +74,11 @@ pub fn diff<'a>(env: Env<'a>, before_path: &str, after_path: &str) -> NifResult<
     if result != before {
         let mut bytes: Vec<u8> = Vec::new();
         match result.write_to(&mut Cursor::new(&mut bytes), image::ImageOutputFormat::Png) {
-            Ok(_) => return Ok((different(), bytes).encode(env)),
+            Ok(_) => return Ok((atom::error(), different(), bytes).encode(env)),
             Err(_) => return Ok((atom::error(), write_failure()).encode(env)),
         }
     } else {
-        return Ok((atom::ok()).encode(env));
+        return Ok((atom::ok(), images_match()).encode(env));
     }
 }
 
