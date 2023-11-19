@@ -66,4 +66,28 @@ defmodule SnappyImageDiff do
       {:error, :different, 0.9833533452322089, "test/fixtures/1a-diff.png"}
   """
   def diff(_before, _after, _output_path), do: :erlang.nif_error(:nif_not_loaded)
+
+  @doc """
+  Compare two images and return a tuple with the result.
+
+  Returns `{:ok, :images_match}` if the images are identical.
+
+  Returns `{:error, :dimension_mismatch}` if the images are different sizes.
+
+  Returns `{:error, :different, score, diff_location}` if the images are different.
+
+
+  ## Examples
+
+      iex> SnappyImageDiff.score("test/fixtures/1a.png", "test/fixtures/1a.png")
+      {:ok, :images_match}
+
+      iex> SnappyImageDiff.score("test/fixtures/6a.png", "test/fixtures/6a_cropped.png")
+      {:error, :dimension_mismatch}
+
+      iex> SnappyImageDiff.score("test/fixtures/1a.png", "test/fixtures/1b.png")
+      {:error, :different, 0.9833533452322089 }
+  """
+
+  def score(_before, _after), do: :erlang.nif_error(:nif_not_loaded)
 end
