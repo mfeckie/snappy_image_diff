@@ -4,7 +4,7 @@ defmodule SnappyImageDiff do
 
   use RustlerPrecompiled,
     otp_app: :snappy_image_diff,
-    crate: :diff,
+    crate: :snappy_image_diff,
     version: version,
     base_url: "https://github.com/mfeckie/snappy_image_diff/releases/download/#{version}",
     force_build: System.get_env("FORCE_COMPILE") in ["1", "true"],

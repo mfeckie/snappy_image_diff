@@ -1,5 +1,5 @@
 {
   "rust-analyzer.linkedProjects": [
-    "native/diff/Cargo.toml"
+    "native/snappy_image_diff/Cargo.toml"
   ]
 }

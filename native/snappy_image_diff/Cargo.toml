@@ -1,5 +1,5 @@
 [package]
-name = "diff"
+name = "snappy_image_diff"
 version = "0.1.0"
 authors = []
 edition = "2021"
