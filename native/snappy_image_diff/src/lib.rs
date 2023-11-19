@@ -34,7 +34,6 @@ pub fn diff<'a>(
                 return Ok((atom::ok(), images_match()).encode(env));
             } else {
                 let output_file = format!("{}.png", output_path);
-
                 match result.image.to_color_map().save(&output_file) {
                     Ok(_) => {
                         return Ok(
@@ -50,11 +49,7 @@ pub fn diff<'a>(
 }
 
 #[rustler::nif]
-pub fn score<'a>(
-    env: Env<'a>,
-    before_path: &str,
-    after_path: &str,
-) -> NifResult<Term<'a>> {
+pub fn score<'a>(env: Env<'a>, before_path: &str, after_path: &str) -> NifResult<Term<'a>> {
     let before = match image::open(before_path) {
         Ok(image) => image.to_rgb8(),
         Err(_) => return Ok((atom::error(), not_found()).encode(env)),
