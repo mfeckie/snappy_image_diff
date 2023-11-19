@@ -12,3 +12,4 @@ crate-type = ["cdylib"]
 [dependencies]
 rustler = "0.30.0"
 image = "0.24.7"
+image-compare = "0.3.1"
