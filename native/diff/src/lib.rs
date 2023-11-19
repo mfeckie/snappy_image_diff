@@ -31,7 +31,7 @@ pub fn diff<'a>(env: Env<'a>, before_path: &str, after_path: &str, output_path: 
                 let output_file = format!("{}.png", output_path);
                 
                 match result.image.to_color_map().save(&output_file) {
-                    Ok(_) => return Ok((atom::error(), different(), output_file).encode(env)),
+                    Ok(_) => return Ok((atom::error(), different(), result.score, output_file).encode(env)),
                     Err(_) => return Ok((atom::error(), write_failure()).encode(env)),
                 }
             }

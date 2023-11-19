@@ -31,7 +31,8 @@ defmodule SnappyImageDiffTest do
     for n <- 1..7 do
       {before_image, after_image, diff_image} = fixture(n)
 
-      assert {:error, :different, diff_location} = SnappyImageDiff.diff(before_image, after_image)
+      assert {:error, :different, _score, diff_location} =
+               SnappyImageDiff.diff(before_image, after_image)
 
       assert diff_image == File.read!(diff_location)
     end

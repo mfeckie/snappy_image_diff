@@ -1,6 +1,6 @@
 # SnappyImageDiff
 
-**TODO: Add description**
+Elixir wrapper for [image-compare](https://github.com/ChrisRega/image-compare).
 
 ## Installation
 
@@ -15,7 +15,17 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/snappy_image_diff>.
+## Usage
 
+Provide SnappyImageDiff with two files to compare and an output destination for any diff
+
+```elixir
+SnappyImageDiff.compare("image1.png", "image2.png", "some_directory/diff.png")
+```
+
+For more detail, see the docs.
+
+## License
+
+SnappyImageDiff is released under the MIT License. See the LICENSE file for further
+details.
