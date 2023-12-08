@@ -7,7 +7,8 @@ rustler::atoms! {
     different,
     dimension_mismatch,
     images_match,
-    not_found,
+    baseline_image_not_found,
+    comparison_image_not_found,
     write_failure
 }
 
@@ -20,12 +21,12 @@ pub fn diff<'a>(
 ) -> NifResult<Term<'a>> {
     let before = match image::open(before_path) {
         Ok(image) => image.to_rgb8(),
-        Err(_) => return Ok((atom::error(), not_found()).encode(env)),
+        Err(_) => return Ok((atom::error(), baseline_image_not_found()).encode(env)),
     };
 
     let after = match image::open(after_path) {
         Ok(image) => image.to_rgb8(),
-        Err(_) => return Ok((atom::error(), not_found()).encode(env)),
+        Err(_) => return Ok((atom::error(), comparison_image_not_found()).encode(env)),
     };
 
     match image_compare::rgb_similarity_structure(&Algorithm::RootMeanSquared, &before, &after) {
@@ -52,12 +53,12 @@ pub fn diff<'a>(
 pub fn score<'a>(env: Env<'a>, before_path: &str, after_path: &str) -> NifResult<Term<'a>> {
     let before = match image::open(before_path) {
         Ok(image) => image.to_rgb8(),
-        Err(_) => return Ok((atom::error(), not_found()).encode(env)),
+        Err(_) => return Ok((atom::error(), baseline_image_not_found()).encode(env)),
     };
 
     let after = match image::open(after_path) {
         Ok(image) => image.to_rgb8(),
-        Err(_) => return Ok((atom::error(), not_found()).encode(env)),
+        Err(_) => return Ok((atom::error(), comparison_image_not_found()).encode(env)),
     };
 
     match image_compare::rgb_similarity_structure(&Algorithm::RootMeanSquared, &before, &after) {

@@ -19,6 +19,22 @@ defmodule SnappyImageDiffTest do
     assert {:ok, :images_match} = SnappyImageDiff.diff(before_image, after_image)
   end
 
+  test "Baseline image missing" do
+    before_image = "test/fixtures/not_found.png"
+    after_image = "test/fixtures/1b.png"
+
+    assert {:error, :baseline_image_not_found} =
+             SnappyImageDiff.diff(before_image, after_image)
+  end
+
+  test "Comparison image missing" do
+    before_image = "test/fixtures/1a.png"
+    after_image = "test/fixtures/not_found.png"
+
+    assert {:error, :comparison_image_not_found} =
+             SnappyImageDiff.diff(before_image, after_image)
+  end
+
   test "Mismatched sizes" do
     before_image = "test/fixtures/6a.png"
     after_image = "test/fixtures/6a_cropped.png"
