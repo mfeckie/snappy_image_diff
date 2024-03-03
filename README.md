@@ -25,6 +25,16 @@ SnappyImageDiff.compare("image1.png", "image2.png", "some_directory/diff.png")
 
 For more detail, see the docs.
 
+## Publishing
+
+After CI has completed and the binaries have been compiled, download them and generate checksum
+
+`mix rustler_precompiled.download SnappyImageDiff --all --print`
+
+Then publish to Hex
+
+`mix hex.publish`
+
 ## License
 
 SnappyImageDiff is released under the MIT License. See the LICENSE file for further
