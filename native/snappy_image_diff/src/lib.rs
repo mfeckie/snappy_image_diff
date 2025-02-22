@@ -12,7 +12,7 @@ rustler::atoms! {
     write_failure
 }
 
-#[rustler::nif]
+#[rustler::nif(schedule = "DirtyCpu")]
 pub fn diff<'a>(
     env: Env<'a>,
     before_path: &str,
@@ -49,7 +49,7 @@ pub fn diff<'a>(
     }
 }
 
-#[rustler::nif]
+#[rustler::nif(schedule = "DirtyCpu")]
 pub fn score<'a>(env: Env<'a>, before_path: &str, after_path: &str) -> NifResult<Term<'a>> {
     let before = match image::open(before_path) {
         Ok(image) => image.to_rgb8(),
