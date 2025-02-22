@@ -1,15 +1,15 @@
 [package]
-name = "snappy_image_diff"
-version = "0.1.0"
-authors = []
-edition = "2021"
+  name = "snappy_image_diff"
+  version = "0.1.0"
+  authors = []
+  edition = "2021"
 
 [lib]
-name = "snappy_image_diff"
-path = "src/lib.rs"
-crate-type = ["cdylib"]
+  name = "snappy_image_diff"
+  path = "src/lib.rs"
+  crate-type = ["cdylib"]
 
 [dependencies]
-rustler = "0.31.0"
-image = "0.24.7"
-image-compare = "0.3.1"
+  rustler = "0.33.0"
+  image = "0.25.1"
+  image-compare = "0.4.1"
