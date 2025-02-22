@@ -73,4 +73,4 @@ pub fn score<'a>(env: Env<'a>, before_path: &str, after_path: &str) -> NifResult
     }
 }
 
-rustler::init!("Elixir.SnappyImageDiff", [diff, score]);
+rustler::init!("Elixir.SnappyImageDiff");
